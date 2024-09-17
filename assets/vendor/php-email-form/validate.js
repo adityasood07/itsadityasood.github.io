@@ -1,15 +1,15 @@
 jQuery(document).ready(function($) {
   "use strict";
 
-  //Contact
+  // Contact
   $('form.php-email-form').submit(function() {
-   
+
     var f = $(this).find('.form-group'),
       ferror = false,
       emailExp = /^[^\s()<>@,;:\/]+@\w[\w\.-]+\.[a-z]{2,}$/i;
 
     f.children('input').each(function() { // run all inputs
-     
+
       var i = $(this); // current input
       var rule = i.attr('data-rule');
 
@@ -43,7 +43,7 @@ jQuery(document).ready(function($) {
             break;
 
           case 'checked':
-            if (! i.is(':checked')) {
+            if (!i.is(':checked')) {
               ferror = ierror = true;
             }
             break;
@@ -89,35 +89,45 @@ jQuery(document).ready(function($) {
         i.next('.validate').html((ierror ? (i.attr('data-msg') != undefined ? i.attr('data-msg') : 'wrong Input') : '')).show('blind');
       }
     });
+
     if (ferror) return false;
     else var str = $(this).serialize();
 
     var this_form = $(this);
+    
+    // Set action URL or post data directly to email
     var action = $(this).attr('action');
+    if (!action) {
+      action = "send_email.php"; // Define your backend PHP script here
+    }
 
-    if( ! action ) {
+    if (!action) {
       this_form.find('.loading').slideUp();
       this_form.find('.error-message').slideDown().html('The form action property is not set!');
       return false;
     }
-    
+
     this_form.find('.sent-message').slideUp();
     this_form.find('.error-message').slideUp();
     this_form.find('.loading').slideDown();
-    
+
     $.ajax({
       type: "POST",
       url: action,
-      data: str,
+      data: str + "&to=adityasood2196@gmail.com", // Send all messages to the specified email
       success: function(msg) {
-        if (msg == 'OK') {
+        if (msg === 'OK') {
           this_form.find('.loading').slideUp();
           this_form.find('.sent-message').slideDown();
-          this_form.find("input:not(input[type=submit]), textarea").val('');
+          this_form.find("input:not(input[type=submit]), textarea").val(''); // Clear form fields
         } else {
           this_form.find('.loading').slideUp();
           this_form.find('.error-message').slideDown().html(msg);
         }
+      },
+      error: function() {
+        this_form.find('.loading').slideUp();
+        this_form.find('.error-message').slideDown().html('Failed to send message. Please try again later.');
       }
     });
     return false;
