@@ -6,7 +6,7 @@ jQuery(document).ready(function($) {
    
     var f = $(this).find('.form-group'),
       ferror = false,
-      emailExp = adityasood2196@gmail.com;
+      emailExp = /^[^\s()<>@,;:\/]+@\w[\w\.-]+\.[a-z]{2,}$/i;
 
     f.children('input').each(function() { // run all inputs
      
