@@ -333,52 +333,94 @@
 
 
   <!-- Start Project Section -->
-  <section id="portfolio" class="portfolio">
-    <div class="container">
+<!-- Portfolio Section -->
+<section id="portfolio" class="portfolio">
+  <div class="container">
 
-      <div class="section-title">
-        <h2>Projects</h2>
+    <div class="section-title">
+      <h2>Projects</h2>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-12 d-flex justify-content-center">
+        <ul id="portfolio-filters">
+          <li data-filter="*" class="filter-active">All</li>
+          <li data-filter=".filter-app">Web-App</li>
+          <li data-filter=".filter-project">Project</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="row portfolio-container">
+      <div class="col-lg-4 col-md-6 portfolio-item filter-app">
+        <center><h4>Netflix Movie Recommendation System</h4></center>
+        <div class="portfolio-wrap">
+          <img src="assets/img/project/recommender.jpg" class="img-fluid" alt="">
+          <div class="portfolio-info">
+            <div class="portfolio-links">
+              <a href="projects/recommender.html" data-gall="portfolioDetailsGallery" data-vbtype="iframe" class="venobox" title="Project Details">
+                <i class="bx bx-info-circle"></i>
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <div class="row">
-        <div class="col-lg-12 d-flex justify-content-center">
-          <ul id="portfolio-flters">
-            <li data-filter="*" class="filter-active">All</li>
-            <li data-filter=".filter-app">Web-App</li>
-            <li data-filter=".filter-project">Project</li>       <!-- navigation bar -->
-          </ul>
-        </div>
-
-
-        <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-          <center><h4>Netflix Movie Recommedation System</h4></center>
-          <div class="portfolio-wrap">
-            <img src="assets/img/project/recommender.jpg" class="img-fluid" alt="">
-            <div class="portfolio-info">
-              
-              <div class="portfolio-links">
-                <a href="projects/recommender.html" data-gall="portfolioDetailsGallery" data-vbtype="iframe" class="venobox" title="Project Details"><i class="bx bx-info-circle"></i></a>
-              </div>
+      <div class="col-lg-4 col-md-6 portfolio-item filter-app">
+        <center><h4>Capstone Project</h4></center>
+        <div class="portfolio-wrap">
+          <img src="assets/img/project/blog.jpg" class="img-fluid" alt="">
+          <div class="portfolio-info">
+            <div class="portfolio-links">
+              <a href="projects/blog.html" data-gall="portfolioDetailsGallery" data-vbtype="iframe" class="venobox" title="Project Details">
+                <i class="bx bx-info-circle"></i>
+              </a>
             </div>
           </div>
         </div>
-
-        <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-          <center><h4>Capstone Project</h4></center>
-          <div class="portfolio-wrap">
-            <img src="assets/img/project/blog.jpg" class="img-fluid" alt="">
-            <div class="portfolio-info">
-              
-              <div class="portfolio-links">
-                <a href="projects/blog.html" data-gall="portfolioDetailsGallery" data-vbtype="iframe" class="venobox" title="Project Details"><i class="bx bx-info-circle"></i></a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div> 
+      </div>
     </div>
-  </section>
+  </div>
+</section>
+
+<!-- Include CSS and JS files -->
+<link rel="stylesheet" href="path/to/venobox.css"> <!-- Venobox CSS -->
+<link rel="stylesheet" href="path/to/your-custom-style.css"> <!-- Custom CSS -->
+
+<script src="path/to/jquery.min.js"></script>
+<script src="path/to/isotope.pkgd.min.js"></script> <!-- Isotope for filtering -->
+<script src="path/to/venobox.min.js"></script> <!-- Venobox for modals -->
+
+<script>
+// Initialize Isotope for filtering
+$(document).ready(function() {
+  var portfolioIsotope = $('.portfolio-container').isotope({
+    itemSelector: '.portfolio-item',
+    layoutMode: 'fitRows'
+  });
+
+  $('#portfolio-filters li').on('click', function() {
+    $("#portfolio-filters li").removeClass('filter-active');
+    $(this).addClass('filter-active');
+
+    portfolioIsotope.isotope({
+      filter: $(this).data('filter')
+    });
+  });
+
+  // Initialize Venobox for modals
+  $('.venobox').venobox({
+    framewidth : '700px', // default: ''
+    frameheight: '500px', // default: ''
+    border     : '10px', // default: '0'
+    bgcolor    : '#5dff5e', // default: '#fff'
+    titleattr  : 'data-title', // default: 'title'
+    numeratio  : true, // default: false
+    infinigall : true // default: false
+  });
+});
+</script>
+
 
   <!-- End Project Section -->
 
